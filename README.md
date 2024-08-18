@@ -1,9 +1,11 @@
 # tecweb
 
-Matrícula: 202123589
+**Matrícula:** _202123589_
 
-_Nombre: Mayte Hernández Espinoza_
+**Nombre:** _Mayte Hernández Espinoza_
 
-**Materia: Desarrollo de Aplicaciones Web**
+**Materia:** _Desarrollo de Aplicaciones Web_
 
-<Periodo: Otoño 2024>
+**Periodo:** _Otoño 2024_
+
+**Descripción:** _El propósito de este repositorio es almacenar la sparacticas y proyectos del curso de DDAW_
