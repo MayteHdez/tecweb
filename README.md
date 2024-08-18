@@ -8,4 +8,4 @@
 
 **Periodo:** _Otoño 2024_
 
-**Descripción:** _El propósito de este repositorio es almacenar la sparacticas y proyectos del curso de DDAW_
+**Descripción:** _El propósito de este repositorio es almacenar las practicas y proyectos del curso de DDAW_
