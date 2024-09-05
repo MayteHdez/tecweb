@@ -137,6 +137,18 @@
     echo "Valor de \$e: " . var_export($e, true) . "<br>";
     unset($a, $b, $c, $d, $e, $f);
 
+    echo "<br><p>Ejercicio 7</p>";
+    $apache_version = $_SERVER['SERVER_SOFTWARE'];
+    $php_version = phpversion();
+
+    $server_os = php_uname();
+
+    $client_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+    echo "Versión de Apache: $apache_version<br>";
+    echo "Versión de PHP: $php_version<br>";
+    echo "Sistema operativo del servidor: $server_os<br>";
+    echo "Idioma del navegador del cliente: $client_language<br>";
     ?> 
 </body>
 </html>
