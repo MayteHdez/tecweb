@@ -72,6 +72,34 @@
 
     unset($a, $b, $c, $z);
 
+    echo "<br><p>Ejercicio 4</p>";
+    $a = "PHP5";
+    echo "<p>" . $GLOBALS['a'] . " (tipo: " . gettype($GLOBALS['a']) . ")</p>";
+    
+    $z[] = &$a;
+    echo "<p>" . $GLOBALS['z'][0] . " (tipo: " . gettype($GLOBALS['z']) . ")</p>";
+    
+    $b = "5a version de PHP";
+    echo "<p>" . $GLOBALS['b'] . " (tipo: " . gettype($GLOBALS['b']) . ")</p>";
+    
+    $c = $b * 10;
+    echo "<p>" . $GLOBALS['c'] . " (tipo: " . gettype($GLOBALS['c']) . ")</p>";
+    
+    $a .= $b;
+    echo "<p>" . $GLOBALS['a'] . " (tipo: " . gettype($GLOBALS['a']) . ")</p>";
+    
+    $b *= $c;
+    echo "<p>" . $GLOBALS['b'] . " (tipo: " . gettype($GLOBALS['b']) . ")</p>";
+    
+    $z[0] = "MySQL";
+    echo "<p>" . $GLOBALS['z'][0] . " (tipo: " . gettype($GLOBALS['z']) . ")</p>";
+    
+    echo "<pre>";
+    print_r($GLOBALS['z']);
+    echo "</pre>";
+
+    unset($a, $b, $c, $z, $GLOBALS['a'], $GLOBALS['b'], $GLOBALS['c'], $GLOBALS['z']);
+
     ?> 
 </body>
 </html>
