@@ -100,6 +100,20 @@
 
     unset($a, $b, $c, $z, $GLOBALS['a'], $GLOBALS['b'], $GLOBALS['c'], $GLOBALS['z']);
 
+    echo "<br><p>Ejercicio 5</p>";
+    $a = "7 personas";
+    $b = (integer) $a;
+    $a = "9E3";
+    $c = (double) $a;
+
+    echo "$a<br>";
+    echo "$b<br>";
+    echo "$c<br>";
+
+    unset($a, $b, $c);
+
+    
+
     ?> 
 </body>
 </html>
