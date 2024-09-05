@@ -112,7 +112,30 @@
 
     unset($a, $b, $c);
 
-    
+    echo "<br><p>Ejercicio 6</p>";
+    $a = "0";
+    $b = "TRUE";
+    $c = FALSE;
+    $d = ($a OR $b);
+    $e = ($a AND $c);
+    $f = ($a XOR $b);
+
+    var_dump((bool)$a);
+    echo "<br>";
+    var_dump((bool)$b); 
+    echo "<br>";
+    var_dump((bool)$c);
+    echo "<br>"; 
+    var_dump((bool)$d);
+    echo "<br>"; 
+    var_dump((bool)$e);
+    echo "<br>"; 
+    var_dump((bool)$f); 
+    echo "<br><br>";
+
+    echo "Valor de \$c: " . var_export($c, true) . "<br>";
+    echo "Valor de \$e: " . var_export($e, true) . "<br>";
+    unset($a, $b, $c, $d, $e, $f);
 
     ?> 
 </body>
