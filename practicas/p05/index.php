@@ -13,6 +13,7 @@
     $_element1 = "_element1";
     //$house*5 = "house*5"; Marca un error de sintaxis
     
+    echo "<p>Ejercicio 1</p>";
     echo "<p>$_myvar</p>";
     echo "<p>$_7var</p>";
     echo "<p>$myvar</p>";
@@ -21,8 +22,24 @@
     //echo "<p>$house*5 </p>";
 
     unset($_myvar, $_7var, $myvar, $var7, $_element1);
-
+    echo "<br><p>Ejercicio 2</p>";
+    $a = "ManejadorSQL";
+    $b = 'MySQL';
+    $c = &$a;
     
+    echo "<p>Primer bloque de asignaciones:</p>";
+    echo "<p>$a</p>";
+    echo "<p>$b</p>";
+    echo "<p>$c</p>";
+
+    $a = "PHP server";
+    $b = &$a;
+
+    echo "<p>Segundo bloque de asignaciones:</p>";
+    echo "<p>$a</p>";
+    echo "<p>$b</p>";
+    echo "<p>$c</p>";
+
     ?> 
 </body>
 </html>
