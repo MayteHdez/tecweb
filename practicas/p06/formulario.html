@@ -17,8 +17,11 @@
     <p>¿Quieres cambiar tus viejos tenis por un par personalizado de Tenis Mike&#174;?<br><br>Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
 
     <form action="http://54.203.246.162/neo/classroom/hw/concurso.php" method="POST">
-    <p>Información del Participante</p>
-
+    
+    
+    <h2>Información de Participación</h2>
+    <fieldset>
+    <legend>Información Personal</legend>
     <ul>
     <li>Nombre:<input type="text" name="name"></li>
     <li>Dirección de E-mail:<input type="email" name="email"></li>
@@ -27,28 +30,35 @@
     <textarea name="story" rows="4" cols="60" maxlength="300"
     placeholder="No más de 300 caracteres de longitud"></textarea></li>
     </ul>
+    </fieldset>
 
-    <h2>Diseña tus Mike personalizados:</h2>
+  <h2>Diseña tus Mike personalizados:</h2>
 
-    <p>Diseño personalizado del Tenis</p>
+  <fieldset>
+  <legend>Diseño personalizado del Tenis</legend>
 
-    <p>Color <em>(escoge uno)</em>:</p>
+    <fieldset>
+    <legend>Color <em>(escoge uno)</em>:</legend>
       <ul>
       <li><input type="radio" name="color" value="red">Red</li>
       <li><input type="radio" name="color" value="blue" checked>Azul</li>
       <li><input type="radio" name="color" value="black">Negro</li>
       <li><input type="radio" name="color" value="silver">Plateado</li>
       </ul>
+    </fieldset>
 
-    <p>Características <em>(escoge tantas como quieras)</em>:</p>
+    <fieldset>
+    <legend>Características <em>(escoge tantas como quieras)</em>:</legend>
       <ul>
       <li><li><input type="checkbox" name="features[]" value="laces">Cordones brillantes</li>
       <li><input type="checkbox" name="features[]" value="metallic_logo" checked>Logo metálico</li>
       <li><input type="checkbox" name="features[]" value="light_up_soles">Suela luminosa</li>
       <li><input type="checkbox" name="features[]" value="wifi">WiFi integrado</li>
       </ul>
+    </fieldset>
 
-    <p>Talla</p>
+    <fieldset>
+    <legend>Talla</legend>
     <p>Las medidas reflejan el estándar masculino:
     <select name="shoe_size" size="1">
       <option value="3">3</option>
@@ -61,9 +71,12 @@
       <option value="10">10</option>
       <option value="11">11</option>
     </select></p>
+    </fieldset>
+
+  </fieldset>
 
     <p><input type="submit" value="¡Chidos mis Tenis!">
-    <input type="reset" value="Limpiar"></p>
+    <input type="reset" value="Restablecer"></p>
 
   </form>
 
