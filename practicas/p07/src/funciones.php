@@ -25,7 +25,7 @@ function mult5y7($num) {
             return rand($min, $max);
         }
         
-        do {
+        while(count($filas)<4) {
             $numeros = [
                 generarNumeroAleatorio(1, 1000),
                 generarNumeroAleatorio(1, 1000),
@@ -38,12 +38,11 @@ function mult5y7($num) {
             if (verificarSecuencia($numeros)) {
                 $filas[] = $numeros;
             }
-        } while (count($filas) === 0); // Repetir hasta encontrar al menos una secuencia válida
+        }
         
-        // Mostrar resultados
-
+ 
         echo "<table border='1'>";
-        echo "<tr><th>Columna 1</th><th>Columna 2</th><th>Columna 3</th></tr>";
+        echo "<tr><th>impar</th><th>par</th><th>impar</th></tr>";
         foreach ($filas as $fila) {
             echo "<tr>";
             foreach ($fila as $numero) {
@@ -52,6 +51,9 @@ function mult5y7($num) {
             echo "</tr>";
         }
         echo "</table>";
+
+        echo "<p>Iteraciones: $iteraciones</p>";
+        echo "<p>Números generados: $numerosGenerados</p>";
     }
 
     

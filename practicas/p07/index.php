@@ -13,7 +13,6 @@
 
     if (isset($_GET['numero'])) {
         $numero = $_GET['numero'];
-        // Llamar a la función para comprobar si el número es múltiplo de 5 y 7
         mult5y7($numero);
     }else {
         echo 'No se ha pasado ningún número en la URL.';
@@ -25,7 +24,7 @@
     <?php
     generarSecuenciaValida();
     ?>
-   <<!--
+   <!--
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
         Name: <input type="text" name="name"><br>
@@ -40,6 +39,6 @@
             echo '<br>';
             echo $_POST["email"];
         }
-    ?>-->>
+    ?>-->
 </body>
 </html>
