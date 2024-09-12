@@ -56,6 +56,15 @@ function mult5y7($num) {
         echo "<p>Números generados: $numerosGenerados</p>";
     }
 
+    function numeroEntero($num) {
+        $min =1;
+        $max =1000;
+        do {
+            $numAleatorio = rand($min, $max);
+        }while($numAleatorio % $num!=0);
+        echo $numAleatorio.' es el primer número entero obtenido aleatoriamente, múltiplo de '.$num;
+    }
+
     
 
     ?>

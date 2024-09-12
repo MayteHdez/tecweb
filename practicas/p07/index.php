@@ -10,7 +10,6 @@
     <p>Programa para comprobar si un número es un múltiplo de 5 y 7</p>
     <?php
     include_once 'src/funciones.php';
-
     if (isset($_GET['numero'])) {
         $numero = $_GET['numero'];
         mult5y7($numero);
@@ -24,6 +23,18 @@
     <?php
     generarSecuenciaValida();
     ?>
+
+    <h2>Ejercicio 3</h2>
+    <p>Programa para para encontrar el primer número entero obtenido aleatoriamente,
+    pero que además sea múltiplo de un número dado</p>
+    <?php
+    if (isset($_GET['numero'])) {
+        $numero = $_GET['numero'];
+        numeroEntero($numero);
+    }else {
+        echo 'No se ha pasado ningún número en la URL.';}
+    ?>
+
    <!--
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
