@@ -35,6 +35,12 @@
         echo 'No se ha pasado ningún número en la URL.';}
     ?>
 
+<h2>Ejercicio 4</h2>
+    <p>Programa que crea un arreglo con las letras 'a' a 'z' y las muestra en una tabla.</p>
+    <?php
+    tabla();
+    ?>
+
    <!--
     <h2>Ejemplo de POST</h2>
     <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">

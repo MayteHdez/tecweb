@@ -65,6 +65,22 @@ function mult5y7($num) {
         echo $numAleatorio.' es el primer número entero obtenido aleatoriamente, múltiplo de '.$num;
     }
 
+    function tabla() {
+        $arreglo = array();
+        for ($i = 97; $i <= 122; $i++) {
+            $arreglo[$i] = chr($i); 
+        }
+
+        echo "<table border='1'>";
+        echo "<tr><th>Índice</th><th>Letra</th></tr>";
+        foreach ($arreglo as $key => $value) {
+            echo "<tr>";
+            echo "<td>$key</td>";  
+            echo "<td>$value</td>";  
+            echo "</tr>";
+        }
+        echo "</table>";
+    }
     
 
     ?>
