@@ -35,27 +35,11 @@
         echo 'No se ha pasado ningún número en la URL.';}
     ?>
 
-<h2>Ejercicio 4</h2>
+    <h2>Ejercicio 4</h2>
     <p>Programa que crea un arreglo con las letras 'a' a 'z' y las muestra en una tabla.</p>
     <?php
     tabla();
     ?>
-
-   <!--
-    <h2>Ejemplo de POST</h2>
-    <form action="http://localhost/tecweb/practicas/p04/index.php" method="post">
-        Name: <input type="text" name="name"><br>
-        E-mail: <input type="text" name="email"><br>
-        <input type="submit">
-    </form>
-    <br>
-    #<php
-        if(isset($_POST["name"]) && isset($_POST["email"]))
-        {
-            echo $_POST["name"];
-            echo '<br>';
-            echo $_POST["email"];
-        }
-    ?>-->
+    
 </body>
 </html>

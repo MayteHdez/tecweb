@@ -81,6 +81,5 @@ function mult5y7($num) {
         }
         echo "</table>";
     }
-    
 
     ?>
