@@ -57,8 +57,8 @@ if ($result->num_rows > 0) {
 }
 
 // Si no existe, insertar el nuevo producto en la BD
-$sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
-               VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt_insert = $link->prepare($sql_insert);
 
 // Verificar si se preparó correctamente
@@ -66,8 +66,8 @@ if ($stmt_insert === false) {
     die('Error en la preparación de la consulta de inserción: ' . $link->error);
 }
 
-// Asignar los valores a insertar
-$stmt_insert->bind_param('sssdsis', $nombre, $marca, $modelo, $precio, $detalles, $unidades, $rutaImagen);
+$eliminado = 0;
+$stmt_insert->bind_param('sssdsis', $nombre, $marca, $modelo, $precio, $detalles, $unidades, $rutaImagen, $eliminado);
 
 // Ejecutar la inserción
 if ($stmt_insert->execute()) {
