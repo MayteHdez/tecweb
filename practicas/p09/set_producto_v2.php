@@ -57,8 +57,9 @@ if ($result->num_rows > 0) {
 }
 
 // Si no existe, insertar el nuevo producto en la BD
-$sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
+$sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen) 
                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
 $stmt_insert = $link->prepare($sql_insert);
 
 // Verificar si se preparó correctamente
