@@ -56,9 +56,8 @@ if ($result->num_rows > 0) {
     die('Error: Ya existe un producto con el mismo nombre, modelo y marca.');
 }
 
-// Si no existe, insertar el nuevo producto en la BD
-$sql_insert = "INSERT INTO productos (nombre, marca, modelo, precio, detalles, unidades, imagen, eliminado) 
-               VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+$sql_insert = "INSERT INTO productos 
+               VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
 $stmt_insert = $link->prepare($sql_insert);
 
@@ -69,6 +68,9 @@ if ($stmt_insert === false) {
 
 $eliminado = 0;
 $stmt_insert->bind_param('sssdsisi', $nombre, $marca, $modelo, $precio, $detalles, $unidades, $rutaImagen, $eliminado);
+
+// Ejecutar la consulta
+$stmt_insert->execute();
 
 // Ejecutar la inserción
 if ($stmt_insert->execute()) {
