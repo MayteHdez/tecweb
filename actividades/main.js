@@ -12,7 +12,8 @@ function getDatos()
 
 function ej1()
 {
-    document.write('Hola Mundo');
+    let div1 = document.getElementById("div1");
+    div1.innerHTML = "Hola Mundo";     
 }
 
 function ej2()
@@ -22,27 +23,25 @@ function ej2()
     var altura = 1.92;
     var casado = false;
 
-    document.write( nombre );
-    document.write( '<br>' );
-    document.write( edad );
-    document.write( '<br>' );
-    document.write( altura );
-    document.write( '<br>' );
-    document.write( casado );
+    var div2 = document.getElementById("div2");
+    div2.innerHTML = `
+        Nombre: ${nombre} <br>
+        Edad: ${edad} <br>
+        Altura: ${altura} <br>
+        Casado: ${casado}
+    `;
 }
 
-function ej3()
-{
+function ej3() {
     var nombre;
     var edad;
     nombre = prompt('Ingresa tu nombre:', '');
     edad = prompt('Ingresa tu edad:', '');
-    document.write('Hola ');
-    document.write(nombre);
-    document.write(' así que tienes ');
-    document.write(edad);
-    document.write(' años');
+
+    let div3 = document.getElementById("div3"); 
+    div3.innerHTML = `Hola ${nombre}, así que tienes ${edad} años.`;  
 }
+
 
 function ej4()
 {
@@ -52,11 +51,8 @@ function ej4()
     valor2 = prompt('Introducir segundo número', '');
     var suma = parseInt(valor1)+parseInt(valor2);
     var producto = parseInt(valor1)*parseInt(valor2);
-    document.write('La suma es ');
-    document.write(suma);
-    document.write('<br>');
-    document.write('El producto es ');
-    document.write(producto);
+    document.getElementById('div4').innerHTML = 
+        'La suma es ' + suma + '<br>El producto es ' + producto;
 }
 
 function ej5()
@@ -65,9 +61,10 @@ function ej5()
     var nota;
     nombre = prompt('Ingresa tu nombre:', '');
     nota = prompt('Ingresa tu nota:', '');
-    if (nota>=4) {
-    document.write(nombre+' esta aprobado con un ' + nota);
-}
+    if (nota >= 4) {
+        document.getElementById('div5').innerHTML = 
+            nombre + ' está aprobado con un ' + nota;
+    }
 }
 
 function ej6()
@@ -76,14 +73,14 @@ function ej6()
     num1 = prompt('Ingresa el primer número:', '');
     num2 = prompt('Ingresa el segundo número:', '');
     num1 = parseInt(num1);
-    num2 = parseInt(num2);
-    if (num1>num2) {
-    document.write('el mayor es '+num1);
+    num2 = parseInt(num2);        
+        if (num1 > num2) {
+            document.getElementById('div6').innerHTML = 'El mayor es ' + num1;
+        } else {
+            document.getElementById('div6').innerHTML = 'El mayor es ' + num2;
+        }
     }
-    else {
-    document.write('el mayor es '+num2);
-}
-}
+    
 
 function ej7()
 {
@@ -100,17 +97,16 @@ function ej7()
 
     var pro;
     pro = (nota1+nota2+nota3)/3;
-    if (pro>=7) {
-        document.write('aprobado');
+
+    if (pro >= 7) {
+        resultado = 'Aprobado';
+    } else if (pro>= 4) {
+        resultado = 'Regular';
+    } else {
+        resultado = 'Reprobado';
     }
-    else{
-        if (pro>=4) {
-            document.write('regular');
-        }
-        else {
-            document.write('reprobado');
-        }
-    }
+
+    document.getElementById('div7').innerHTML = resultado;
 }
 
 function ej8()
@@ -120,18 +116,15 @@ function ej8()
     //Convertimos a entero
     valor = parseInt(valor);
     switch (valor) {
-        case 1: document.write('uno');
-                break;
-        case 2: document.write('dos');
-                break;
-        case 3: document.write('tres');
-                break;
-        case 4: document.write('cuatro');
-                break;
-        case 5: document.write('cinco');
-                break;
-        default:document.write('debe ingresar un valor comprendido entre 1 y 5.');
+        case 1: texto = 'uno'; break;
+        case 2: texto = 'dos'; break;
+        case 3: texto = 'tres'; break;
+        case 4: texto = 'cuatro'; break;
+        case 5: texto = 'cinco'; break;
+        default: texto = 'Debe ingresar un valor comprendido entre 1 y 5.'; break;
     }
+
+    document.getElementById('div8').innerHTML = texto;
 }
 
 function ej9()
@@ -152,9 +145,92 @@ function ej10()
 {
     var x;
     x=1;
+    var resultado = '';
     while (x<=100) {
-        document.write(x);
-        document.write('<br>');
+        resultado += x + '<br>';
         x=x+1;
-    }   
+    }
+
+    document.getElementById('div10').innerHTML = resultado;
+}
+
+function ej11()
+{
+    var x=1;
+    var suma=0;
+    var valor;
+    while (x<=5){
+        valor = prompt('Ingresa el valor:', '');
+        valor = parseInt(valor);
+        suma += valor;
+        x = x+1;
+    }
+    document.getElementById('div11').innerHTML = 'La suma de los valores es ' + suma + '<br>';
+}
+
+function ej12()
+{
+    var valor;
+    var resultado = '';
+do{
+    valor = prompt('Ingresa un valor entre 0 y 999:', '');
+    valor = parseInt(valor);
+    resultado += 'El valor ' + valor + ' tiene ';
+        
+        if (valor < 10) {
+            resultado += 'Tiene 1 dígito';
+        } else if (valor < 100) {
+            resultado += 'Tiene 2 dígitos';
+        } else if (valor < 1000) {
+            resultado += 'Tiene 3 dígitos';
+        }
+        
+        resultado += '<br>';
+    } while (valor != 0);
+
+    document.getElementById('div12').innerHTML = resultado; 
+}
+
+function ej13()
+{
+    var f;
+    var resultado = '';
+    for(f=1; f<=10; f++)
+    {
+        resultado += f + ' ';
+    }    
+    document.getElementById('div13').innerHTML = resultado;
+}
+
+function ej14()
+{
+    var resultado = '';
+    resultado += 'Cuidado<br>';
+    resultado += 'Ingresa tu documento correctamente<br>';
+    resultado += 'Cuidado<br>';
+    resultado += 'Ingresa tu documento correctamente<br>';
+    resultado += 'Cuidado<br>';
+    resultado += 'Ingresa tu documento correctamente<br>';
+
+    document.getElementById('div14').innerHTML = resultado;
+}
+
+function ej15()
+{
+    
+}
+
+function ej16()
+{
+    
+}
+
+function ej17()
+{
+    
+}
+
+function ej18()
+{
+    
 }
