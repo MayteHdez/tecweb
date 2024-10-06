@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Productos</title>
+    <script>
+        function validarFormulario(event) {
+            // Validar el nombre del producto
+            const nombre = document.getElementById('nombre').value;
+            if (nombre === "" || nombre.length > 100) {
+                alert("El nombre es obligatorio y debe tener 100 caracteres o menos.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar la marca del producto (selección de una lista)
+            const marca = document.getElementById('marca').value;
+            if (marca === "") {
+                alert("Debe seleccionar una marca de la lista.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar el modelo (alfanumérico y de 25 caracteres o menos)
+            const modelo = document.getElementById('modelo').value;
+            const modeloRegex = /^[a-zA-Z0-9]+$/; // Solo alfanumérico
+            if (modelo === "" || modelo.length > 25 || !modeloRegex.test(modelo)) {
+                alert("El modelo es obligatorio, debe ser alfanumérico y tener 25 caracteres o menos.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar el precio (mayor a 99.99)
+            const precio = parseFloat(document.getElementById('precio').value);
+            if (isNaN(precio) || precio <= 99.99) {
+                alert("El precio debe ser mayor a 99.99.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar los detalles (opcional, pero de 250 caracteres o menos)
+            const detalles = document.getElementById('detalles').value;
+            if (detalles.length > 250) {
+                alert("Los detalles pueden ser opcionales, pero no deben exceder 250 caracteres.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar las unidades (mayor o igual a 0)
+            const unidades = parseInt(document.getElementById('unidades').value);
+            if (isNaN(unidades) || unidades < 0) {
+                alert("Las unidades deben ser mayores o iguales a 0.");
+                event.preventDefault();
+                return false;
+            }
+
+            // Validar la imagen (usar una por defecto si no se proporciona)
+            const imagen = document.getElementById('imagen').value;
+            if (imagen === "") {
+                // Si no se carga una imagen, asignar una imagen por defecto
+                alert("No se cargó ninguna imagen. Se usará una imagen por defecto.");
+                document.getElementById('imagen').setAttribute('value', 'img/imagenpre.jpg');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Registro de Nuevos Productos</h1>
+    
+    <form action="set_producto_v2.php" method="POST" enctype="multipart/form-data" onsubmit="validarFormulario(event)">
+        <label for="nombre">Nombre del Producto (100 caracteres o menos):</label>
+        <input type="text" id="nombre" name="nombre" required maxlength="100"><br><br>
+
+        <label for="marca">Marca del Producto:</label>
+        <select id="marca" name="marca" required>
+            <option value="">Seleccione una marca</option>
+            <option value="Marca1">HarperCollins</option>
+            <option value="Marca2">Planeta</option>
+            <option value="Marca3">Anagrama</option>
+        </select><br><br>
+
+        <label for="modelo">Modelo del Producto (alfanumérico, 25 caracteres o menos):</label>
+        <input type="text" id="modelo" name="modelo" required maxlength="25"><br><br>
+
+        <label for="precio">Precio del Producto (mayor a 99.99):</label>
+        <input type="number" id="precio" name="precio" step="0.01" min="0" required><br><br>
+
+        <label for="detalles">Detalles del Producto (opcional, 250 caracteres o menos):</label>
+        <textarea id="detalles" name="detalles" maxlength="250"></textarea><br><br>
+
+        <label for="unidades">Unidades Disponibles (mayor o igual a 0):</label>
+        <input type="number" id="unidades" name="unidades" min="0" required><br><br>
+
+        <label for="imagen">Imagen del Producto (opcional):</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*"><br><br>
+
+        <input type="submit" value="Registrar Producto">
+    </form>
+</body>
+</html>
