@@ -56,7 +56,7 @@ mysqli_close($link);
             <ul>
                 <li>
                     <label>Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" value="<?= isset($productoSeleccionado['nombre']) ? htmlspecialchars($productoSeleccionado['nombre']) : '' ?>" required maxlength="100">
+                    <input type="text" id="nombre" name="nombre" value="<?= isset($productoSeleccionado['nombre']) ? htmlspecialchars($productoSeleccionado['nombre']) : '' ?>" >
                 </li>
                 <li>
                     <label>Marca:</label>
@@ -69,19 +69,19 @@ mysqli_close($link);
                 </li>
                 <li>
                     <label>Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" required maxlength="25" pattern="[A-Za-z0-9]+">
+                    <input type="text" id="modelo" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" >
                 </li>
                 <li>
                     <label>Precio:</label>
-                    <input type="number" id="precio" name="precio" step="0.01" min="99.99" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
+                    <input type="number" id="precio" name="precio" step="0.01" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
                 </li>
                 <li>
                     <label>Detalles:</label>
-                    <textarea name="detalles" id="detalles" maxlength="250"><?= isset($productoSeleccionado['detalles']) ? htmlspecialchars($productoSeleccionado['detalles']) : '' ?></textarea>
+                    <textarea name="detalles" id="detalles" ><?= isset($productoSeleccionado['detalles']) ? htmlspecialchars($productoSeleccionado['detalles']) : '' ?></textarea>
                 </li>
                 <li>
                     <label>Unidades Disponibles:</label>
-                    <input type="number" id="unidades" name="unidades" min="0" value="<?= isset($productoSeleccionado['unidades']) ? htmlspecialchars($productoSeleccionado['unidades']) : '' ?>" required>
+                    <input type="number" id="unidades" name="unidades" value="<?= isset($productoSeleccionado['unidades']) ? htmlspecialchars($productoSeleccionado['unidades']) : '' ?>" required>
                 </li>
                 <li>
                     <label>Imagen:</label>
@@ -96,45 +96,53 @@ mysqli_close($link);
 
     <script>
         document.getElementById('miFormulario').addEventListener('submit', function(event) {
-            var errores = [];
-            var nombre = document.getElementById('nombre').value.trim();
-            var marca = document.getElementById('marca').value;
-            var modelo = document.getElementById('modelo').value.trim();
-            var precio = document.getElementById('precio').value;
-            var detalles = document.getElementById('detalles').value.trim();
-            var unidades = document.getElementById('unidades').value;
+    var errores = [];
+    var nombre = document.getElementById('nombre').value.trim();
+    var marca = document.getElementById('marca').value;
+    var modelo = document.getElementById('modelo').value.trim();
+    var precio = document.getElementById('precio').value;
+    var detalles = document.getElementById('detalles').value.trim();
+    var unidades = document.getElementById('unidades').value;
 
-            // Validación de cada campo
-            if (nombre === '' || nombre.length > 100) {
-                errores.push('El nombre es obligatorio y debe tener 100 caracteres o menos.');
-            }
+    // Validación de cada campo y mostrar alerta inmediatamente
+    if (nombre === '' || nombre.length > 100) {
+        alert('El nombre es obligatorio y debe tener 100 caracteres o menos.');
+        event.preventDefault();  // Detener el envío del formulario
+        return;  // Salir de la función
+    }
 
-            if (marca === '') {
-                errores.push('Debe seleccionar una marca.');
-            }
+    if (marca === '') {
+        alert('Debe seleccionar una marca.');
+        event.preventDefault();
+        return; 
+    }
 
-            if (modelo === '' || modelo.length > 25 || !/^[A-Za-z0-9]+$/.test(modelo)) {
-                errores.push('El modelo es obligatorio, debe ser alfanumérico y tener 25 caracteres o menos.');
-            }
+    if (modelo === '' || modelo.length > 25 || !/^[A-Za-z0-9]+$/.test(modelo)) {
+        alert('El modelo es obligatorio, debe ser alfanumérico y tener 25 caracteres o menos.');
+        event.preventDefault();
+        return; 
+    }
 
-            if (precio < 99.99 || isNaN(precio)) {
-                errores.push('El precio debe ser mayor a 99.99.');
-            }
+    if (precio < 99.99 || isNaN(precio)) {
+        alert('El precio debe ser mayor a 99.99.');
+        event.preventDefault();
+        return; 
+    }
 
-            if (detalles.length > 250) {
-                errores.push('Los detalles no deben exceder los 250 caracteres.');
-            }
+    if (detalles.length > 250) {
+        alert('Los detalles no deben exceder los 250 caracteres.');
+        event.preventDefault();
+        return; 
+    }
 
-            if (unidades < 0 || isNaN(unidades)) {
-                errores.push('Las unidades deben ser un número no negativo.');
-            }
+    if (unidades < 0 || isNaN(unidades)) {
+        alert('Las unidades deben ser un número no negativo.');
+        event.preventDefault();
+        return; 
+    }
+});
 
-            // Mostrar errores si existen
-            if (errores.length > 0) {
-                event.preventDefault();  // Detener el envío del formulario
-                document.getElementById('error-messages').innerHTML = '<ul><li>' + errores.join('</li><li>') + '</li></ul>';
-            }
-        });
+
     </script>
 </body>
 </html>
