@@ -43,14 +43,14 @@
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>
                             <th scope="row">' . $row['id'] . '</th>
-                            <td>' . $row['nombre'] . '</td>
-                            <td>' . $row['marca'] . '</td>
-                            <td>' . $row['modelo'] . '</td>
-                            <td>' . $row['precio'] . '</td>
-                            <td>' . $row['unidades'] . '</td>
-                            <td>' . utf8_encode($row['detalles']) . '</td>
-                            <td><img src="' . $row['imagen'] . '" alt="Imagen" style="width:100px;height:100px;"/></td>
-                            <td><a href="formulario_productos_v2.html?id=' . $row['id'] . '" class="btn btn-warning">Modificar</a></td>
+                            <td>' . htmlspecialchars($row['nombre']) . '</td>
+                            <td>' . htmlspecialchars($row['marca']) . '</td>
+                            <td>' . htmlspecialchars($row['modelo']) . '</td>
+                            <td>' . htmlspecialchars($row['precio']) . '</td>
+                            <td>' . htmlspecialchars($row['unidades']) . '</td>
+                            <td>' . htmlspecialchars(utf8_encode($row['detalles'])) . '</td>
+                            <td><img src="' . htmlspecialchars($row['imagen']) . '" alt="Imagen" style="width:100px;height:100px;"/></td>
+                            <td><a href="formulario_productos_v2.php?id=' . $row['id'] . '" class="btn btn-warning">Modificar</a></td>
                           </tr>';
                 }
                 
@@ -69,3 +69,4 @@
     ?>
 </body>
 </html>
+

@@ -69,11 +69,11 @@ mysqli_close($link);
                 </li>
                 <li>
                     <label>Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" required maxlength="25">
+                    <input type="text" id="modelo" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" required maxlength="25" pattern="[A-Za-z0-9]+">
                 </li>
                 <li>
                     <label>Precio:</label>
-                    <input type="number" id="precio" name="precio" step="0.01" min="0" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
+                    <input type="number" id="precio" name="precio" step="0.01" min="99.99" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
                 </li>
                 <li>
                     <label>Detalles:</label>
@@ -106,19 +106,19 @@ mysqli_close($link);
 
             // Validación de cada campo
             if (nombre === '' || nombre.length > 100) {
-                errores.push('El nombre es obligatorio y debe tener menos de 100 caracteres.');
+                errores.push('El nombre es obligatorio y debe tener 100 caracteres o menos.');
             }
 
             if (marca === '') {
                 errores.push('Debe seleccionar una marca.');
             }
 
-            if (modelo === '' || modelo.length > 25) {
-                errores.push('El modelo es obligatorio y debe tener menos de 25 caracteres.');
+            if (modelo === '' || modelo.length > 25 || !/^[A-Za-z0-9]+$/.test(modelo)) {
+                errores.push('El modelo es obligatorio, debe ser alfanumérico y tener 25 caracteres o menos.');
             }
 
-            if (precio <= 0 || isNaN(precio)) {
-                errores.push('El precio debe ser un número positivo.');
+            if (precio < 99.99 || isNaN(precio)) {
+                errores.push('El precio debe ser mayor a 99.99.');
             }
 
             if (detalles.length > 250) {
