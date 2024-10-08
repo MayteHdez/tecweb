@@ -37,11 +37,17 @@ mysqli_close($link);
         ol, ul {
             list-style-type: none;
         }
+        .error {
+            color: red;
+        }
     </style>
     <title>Formulario de Productos</title>
 </head>
 <body>
     <h1>Registro de Productos</h1>
+
+    <!-- Mensajes de error -->
+    <div id="error-messages" class="error"></div>
 
     <form id="miFormulario" method="post" action="update_producto.php" enctype="multipart/form-data">
         <fieldset>
@@ -50,11 +56,11 @@ mysqli_close($link);
             <ul>
                 <li>
                     <label>Nombre:</label>
-                    <input type="text" name="nombre" value="<?= isset($productoSeleccionado['nombre']) ? htmlspecialchars($productoSeleccionado['nombre']) : '' ?>" required maxlength="100">
+                    <input type="text" id="nombre" name="nombre" value="<?= isset($productoSeleccionado['nombre']) ? htmlspecialchars($productoSeleccionado['nombre']) : '' ?>" required maxlength="100">
                 </li>
                 <li>
                     <label>Marca:</label>
-                    <select name="marca" required>
+                    <select name="marca" id="marca" required>
                         <option value="">Seleccione una marca</option>
                         <option value="Marca1" <?= (isset($productoSeleccionado['marca']) && $productoSeleccionado['marca'] == 'Marca1') ? 'selected' : '' ?>>Marca1</option>
                         <option value="Marca2" <?= (isset($productoSeleccionado['marca']) && $productoSeleccionado['marca'] == 'Marca2') ? 'selected' : '' ?>>Marca2</option>
@@ -63,19 +69,19 @@ mysqli_close($link);
                 </li>
                 <li>
                     <label>Modelo:</label>
-                    <input type="text" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" required maxlength="25">
+                    <input type="text" id="modelo" name="modelo" value="<?= isset($productoSeleccionado['modelo']) ? htmlspecialchars($productoSeleccionado['modelo']) : '' ?>" required maxlength="25">
                 </li>
                 <li>
                     <label>Precio:</label>
-                    <input type="number" name="precio" step="0.01" min="0" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
+                    <input type="number" id="precio" name="precio" step="0.01" min="0" value="<?= isset($productoSeleccionado['precio']) ? htmlspecialchars($productoSeleccionado['precio']) : '' ?>" required>
                 </li>
                 <li>
                     <label>Detalles:</label>
-                    <textarea name="detalles" maxlength="250"><?= isset($productoSeleccionado['detalles']) ? htmlspecialchars($productoSeleccionado['detalles']) : '' ?></textarea>
+                    <textarea name="detalles" id="detalles" maxlength="250"><?= isset($productoSeleccionado['detalles']) ? htmlspecialchars($productoSeleccionado['detalles']) : '' ?></textarea>
                 </li>
                 <li>
                     <label>Unidades Disponibles:</label>
-                    <input type="number" name="unidades" min="0" value="<?= isset($productoSeleccionado['unidades']) ? htmlspecialchars($productoSeleccionado['unidades']) : '' ?>" required>
+                    <input type="number" id="unidades" name="unidades" min="0" value="<?= isset($productoSeleccionado['unidades']) ? htmlspecialchars($productoSeleccionado['unidades']) : '' ?>" required>
                 </li>
                 <li>
                     <label>Imagen:</label>
@@ -87,5 +93,48 @@ mysqli_close($link);
             <input type="submit" value="Actualizar Producto">
         </p>
     </form>
+
+    <script>
+        document.getElementById('miFormulario').addEventListener('submit', function(event) {
+            var errores = [];
+            var nombre = document.getElementById('nombre').value.trim();
+            var marca = document.getElementById('marca').value;
+            var modelo = document.getElementById('modelo').value.trim();
+            var precio = document.getElementById('precio').value;
+            var detalles = document.getElementById('detalles').value.trim();
+            var unidades = document.getElementById('unidades').value;
+
+            // Validación de cada campo
+            if (nombre === '' || nombre.length > 100) {
+                errores.push('El nombre es obligatorio y debe tener menos de 100 caracteres.');
+            }
+
+            if (marca === '') {
+                errores.push('Debe seleccionar una marca.');
+            }
+
+            if (modelo === '' || modelo.length > 25) {
+                errores.push('El modelo es obligatorio y debe tener menos de 25 caracteres.');
+            }
+
+            if (precio <= 0 || isNaN(precio)) {
+                errores.push('El precio debe ser un número positivo.');
+            }
+
+            if (detalles.length > 250) {
+                errores.push('Los detalles no deben exceder los 250 caracteres.');
+            }
+
+            if (unidades < 0 || isNaN(unidades)) {
+                errores.push('Las unidades deben ser un número no negativo.');
+            }
+
+            // Mostrar errores si existen
+            if (errores.length > 0) {
+                event.preventDefault();  // Detener el envío del formulario
+                document.getElementById('error-messages').innerHTML = '<ul><li>' + errores.join('</li><li>') + '</li></ul>';
+            }
+        });
+    </script>
 </body>
 </html>
