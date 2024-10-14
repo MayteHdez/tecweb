@@ -110,27 +110,79 @@ function buscarProducto(e) {
 function agregarProducto(e) {
     e.preventDefault();
 
-    // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
-    var productoJsonString = document.getElementById('description').value;
-    // SE CONVIERTE EL JSON DE STRING A OBJETO
-    var finalJSON = JSON.parse(productoJsonString);
-    // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
-    finalJSON['nombre'] = document.getElementById('name').value;
-    // SE OBTIENE EL STRING DEL JSON FINAL
-    productoJsonString = JSON.stringify(finalJSON,null,2);
+    // SE OBTIENE EL JSON DEL FORMULARIO
+    let nombre = document.getElementById('name').value.trim();
+    let descripcion = document.getElementById('description').value.trim();
+
+    // VALIDACIONES
+    if (nombre === "" || nombre.length > 100) {
+        window.alert("El nombre es requerido y debe tener 100 caracteres o menos.");
+        return;
+    }
+
+    let finalJSON;
+    try {
+        finalJSON = JSON.parse(descripcion); // Convierte la cadena de texto en objeto JSON
+    } catch (error) {
+        window.alert("El formato del JSON es incorrecto.");
+        return;
+    }
+
+    // Validar marca (requerida y seleccionada de una lista de opciones)
+    if (!finalJSON.marca || finalJSON.marca === "NA") {
+        window.alert("La marca es requerida y debe seleccionarse de una lista.");
+        return;
+    }
+
+    // Validar modelo (requerido, alfanumérico y <= 25 caracteres)
+    if (!finalJSON.modelo || !/^[a-zA-Z0-9\-]+$/.test(finalJSON.modelo) || finalJSON.modelo.length > 25) {
+        window.alert("El modelo es requerido, debe ser alfanumérico y tener 25 caracteres o menos.");
+        return;
+    }
+
+    // Validar precio (requerido y mayor a 99.99)
+    if (!finalJSON.precio || isNaN(finalJSON.precio) || finalJSON.precio <= 99.99) {
+        window.alert("El precio es requerido y debe ser mayor a 99.99.");
+        return;
+    }
+
+    // Validar detalles (opcional y <= 250 caracteres)
+    if (finalJSON.detalles && finalJSON.detalles.length > 250) {
+        window.alert("Los detalles deben tener 250 caracteres o menos.");
+        return;
+    }
+
+    // Validar unidades (requerido y mayor o igual a 0)
+    if (finalJSON.unidades === undefined || isNaN(finalJSON.unidades) || finalJSON.unidades < 0) {
+        window.alert("Las unidades son requeridas y deben ser un número mayor o igual a 0.");
+        return;
+    }
+
+    // Validar imagen (opcional, usa ruta por defecto si no se proporciona)
+    if (!finalJSON.imagen || finalJSON.imagen === "") {
+        finalJSON.imagen = "img/default.png";
+    }
+
+    // Agregar el nombre al JSON final
+    finalJSON['nombre'] = nombre;
+    let productoJsonString = JSON.stringify(finalJSON, null, 2);
 
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
-    var client = getXMLHttpRequest();
+    let client = getXMLHttpRequest();
     client.open('POST', './backend/create.php', true);
     client.setRequestHeader('Content-Type', "application/json;charset=UTF-8");
     client.onreadystatechange = function () {
         // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
             console.log(client.responseText);
+            // Mostrar el resultado de la inserción
+            window.alert(client.responseText);
         }
     };
     client.send(productoJsonString);
 }
+
+
 
 // SE CREA EL OBJETO DE CONEXIÓN COMPATIBLE CON EL NAVEGADOR
 function getXMLHttpRequest() {
