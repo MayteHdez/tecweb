@@ -20,7 +20,7 @@ function init() {
     //listarProductos();
 }
 
-$(function(){
+$(document).ready(function(){
     console.log('jQuery is Working');
     $('#product-result').hide();
 
@@ -29,13 +29,13 @@ $(function(){
             let search = $('#search').val();
             $.ajax({
                 url: 'backend/product-search.php',
-                type: 'POST', //POST O GET???
+                type: 'POST', //POST 
                 data:{search},
                 success: function(response){
                     let products = JSON.parse(response);
                     let template ='';
                     products.forEach(product =>{
-                        template += `<li> ${product.name}</li>`
+                        template += `<li> ${product.nombre}</li>`//hace que muestre solo el nombre d elo que estas buscando
                     });
                     $('#container').html(template);
                     $('#product-result').show();
@@ -46,25 +46,41 @@ $(function(){
 })
 });
 
-$('#product-form').submit(function(e){
-    e.preventDefault();
 
+$('#product-form').submit(function(e){
     const postData = {
-        nombre: $('#name').val(),
-        descripcion: $('#description').val()
+        name: $('#name').val(),
+        description: $('#description').val()
     };
+    $.post('backend/product-add.php', postData, function(response) {
+            console.log(response);
+            $('#name').val('');
+            init();
+            //$('#product-form').trigger('reset');
+    });
+    e.preventDefault();    
+    });
 
     $.ajax({
-        url: 'backend/product-add.php',
-        type: 'POST',
-        contentType: 'application/json', // Aseguramos que se envíe como JSON
-        data: JSON.stringify(postData), // Convertimos a JSON
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-        }
-    });
+        url: 'backend/product-list.php',
+        type: 'GET',
+        success: function(response){
+            let products = JSON.parse(response);
+            let template = '';
+            products.forEach(product =>{
+                template += `
+                    <tr>
+                        <td>${product.id}</td>
+                        <td>${product.nombre}</td>
+                        <td>${product.detalles}</td>
+                    </tr>
+                `
+            });
+            $('#products').html(template);
+
+
+    }
+})
+
     
-});
+//});
