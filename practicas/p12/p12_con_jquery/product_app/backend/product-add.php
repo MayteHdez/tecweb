@@ -10,6 +10,11 @@
     if(!empty($producto)) {
         // SE TRANSFORMA EL STRING DEL JASON A OBJETO
         $jsonOBJ = json_decode($producto);
+
+   
+
+        if ($jsonOBJ !== null) {
+
         // SE ASUME QUE LOS DATOS YA FUERON VALIDADOS ANTES DE ENVIARSE
         $sql = "SELECT * FROM productos WHERE nombre = '{$jsonOBJ->nombre}' AND eliminado = 0";
 	    $result = $conexion->query($sql);
@@ -26,9 +31,13 @@
         }
 
         $result->free();
+    } else {
+        $data['message'] = "ERROR: JSON no válido.";
+    }
+}
         // Cierra la conexion
         $conexion->close();
-    }
+    
 
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
