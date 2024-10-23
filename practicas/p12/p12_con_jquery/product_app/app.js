@@ -132,7 +132,15 @@ $(document).on('click', '.task-item', function(){
         //console.log(response);
         const product = JSON.parse(response);
         $('#name').val(product.nombre);
-        const descripcion = `precio: ${product.precio}\nunidades: ${product.unidades}\nmodelo: ${product.modelo}\nmarca: ${product.marca}\ndetalles: ${product.detalles}\nimagen: ${product.imagen}`;
+        //const descripcion = `precio: ${product.precio}\nunidades: ${product.unidades}\nmodelo: ${product.modelo}\nmarca: ${product.marca}\ndetalles: ${product.detalles}\nimagen: ${product.imagen}`;
+        const descripcion = `{
+            "precio": ${product.precio},
+            "unidades": ${product.unidades},
+            "modelo": "${product.modelo}",
+            "marca": "${product.marca}",
+            "detalles": "${product.detalles}",
+            "imagen": "${product.imagen}"
+          }`;
         $('#description').val(descripcion);
         $('#productId').val(product.id);
         edit = true;
