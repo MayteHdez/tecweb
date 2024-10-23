@@ -8,7 +8,6 @@ var baseJSON = {
     "imagen": "img/default.png"
   };
 
-let edit = false;
 
 function init() {
     /**
@@ -23,8 +22,8 @@ function init() {
 }
 
 $(document).ready(function(){
+    let edit = false;
 
-    //let edit = false;
     console.log('jQuery is Working');
     fetchProducts();
     $('#product-result').hide();
@@ -48,15 +47,15 @@ $(document).ready(function(){
        });
 
         }       
-})
+
 });
 
 
 $('#product-form').submit(function(e){
     const postData = {
         name: $('#name').val(),
-        description: $('#description').val()
-        //id: $('#productId').val()
+        description: $('#description').val(),
+        id: $('#productId').val()
     };
 
     let url = edit === false ? 'backend/product-add.php' : 'backend/product-edit.php';
@@ -135,11 +134,11 @@ $(document).on('click', '.task-item', function(){
         $('#name').val(product.nombre);
         const descripcion = `precio: ${product.precio}\nunidades: ${product.unidades}\nmodelo: ${product.modelo}\nmarca: ${product.marca}\ndetalles: ${product.detalles}\nimagen: ${product.imagen}`;
         $('#description').val(descripcion);
-        //$(#productId)
+        $('#productId').val(product.id);
         edit = true;
 
     })
 
 });
-    
+})
 //})

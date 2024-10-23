@@ -1,18 +1,35 @@
 <?php
     include('database.php');
 
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $descrIption = $_POST['description'];
+    $data = array(
+        'status'  => 'error',
+        'message' => 'La consulta falló'
+    );
 
-    $query = "UPDATE productos SET name= '$name', detalles = '$description' WHERE 
-    id = '$id'";
+    if( isset($_POST['id']) && isset($_POST['name']) && isset($_POST['description']) ) {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
 
-    $result = mysqli_query($conexion, $query);
-    if(!$result){
-        die('query fallido');
-    }
+        $query = "UPDATE productos SET nombre= '$name', detalles = '$description' WHERE 
+        id = '$id'";
+if (mysqli_query($conexion, $query)) {
+    // Si la consulta fue exitosa
+    $data['status'] = "success";
+    $data['message'] = "Producto editado con éxito";
+} else {
+    // Si ocurre un error en la ejecución de la consulta
+    $data['message'] = "ERROR: No se ejecutó la consulta. " . mysqli_error($conexion);
+}
 
-    echo "Edición exitosa"
+// Cerrar la conexión
+$conexion->close();
+} else {
+// Si no se reciben los datos necesarios
+$data['message'] = "ERROR: Faltan datos obligatorios.";
+}
+
+// Convertir el array a JSON y devolver la respuesta
+echo json_encode($data, JSON_PRETTY_PRINT);
 
 ?>
