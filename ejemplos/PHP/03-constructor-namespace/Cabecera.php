@@ -1,5 +1,5 @@
 <?php
-namespace EJMPLOS\POO;
+namespace EJEMPLOS\POO;
 
 class Cabecera{
     private $titulo;
