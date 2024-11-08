@@ -125,29 +125,28 @@ $(document).ready(function() {
         validateField('unidades', !isNaN(unidades) && unidades >= 0, 'Las unidades deben ser mayores o iguales a 0');
     });
 
-    // Manejo del envío del formulario
     $('#product-form').submit(function(e) {
         e.preventDefault(); // Evita que se envíe el formulario de forma tradicional
-
-        // Validación general antes de enviar
+    
+        // Validación de los campos del formulario
         const name = $('#name').val().trim();
-        const marca = $('#marca').val();
-        const modelo = $('#modelo').val();
+        const marca = $('#marca').val().trim();
+        const modelo = $('#modelo').val().trim();
         const precio = parseFloat($('#precio').val());
         const unidades = parseInt($('#unidades').val());
         const detalles = $('#detalles').val() || 'Sin detalles';
-        const imagen = $('#imagen').val() || 'imgdefault.png';
-
+        const imagen = $('#imagen').val() || 'imgdefault.png'; // Posible error: 'img/default.png'
+    
         const isValid = validateField('name', name.length > 0 && name.length <= 100, 'El nombre es requerido y debe tener 100 caracteres o menos') &&
                         validateField('marca', marca !== '', 'La marca es requerida') &&
                         validateField('modelo', /^[a-zA-Z0-9]+$/.test(modelo) && modelo.length <= 25, 'El modelo debe ser alfanumérico y tener 25 caracteres o menos') &&
                         validateField('precio', !isNaN(precio) && precio > 99.99, 'El precio debe ser mayor a 99.99') &&
                         validateField('detalles', detalles.length <= 250, 'Los detalles deben tener 250 caracteres o menos') &&
                         validateField('unidades', !isNaN(unidades) && unidades >= 0, 'Las unidades deben ser mayores o iguales a 0');
-
+    
         if (isValid) {
             const postData = {
-                name: name,
+                nombre: name,
                 precio: precio,
                 unidades: unidades,
                 modelo: modelo,
@@ -155,27 +154,36 @@ $(document).ready(function() {
                 detalles: detalles,
                 imagen: imagen
             };
-
+    
             let url = edit === false ? 'backend/product-add.php' : 'backend/product-edit.php';
-
+    
+            // Comienza la llamada AJAX
             $.post(url, postData, function(response) {
                 console.log(response); // Para depurar y ver la respuesta del servidor
+    
                 let responseData;
                 try {
                     responseData = JSON.parse(response);
                     $('#container').html(`<div class="alert alert-${responseData.status}">${responseData.message}</div>`);
-                    fetchProducts(); // Función para actualizar la lista de productos
+                    
+                    // Actualizar la lista de productos
+                    fetchProducts();
+                    
+                    // Mostrar el resultado
                     $('#product-result').show();
-                    $('#product-form').trigger('reset'); // Resetea el formulario después del envío
+                    
+                    // Limpiar el formulario
+                    $('#product-form').trigger('reset');
                 } catch (error) {
                     console.error("Error parsing JSON:", error);
                     $('#container').html('<div class="alert alert-danger">Error al procesar la respuesta del servidor</div>');
                 }
             }).fail(function() {
-                $('#container').html(`<div class="alert alert-danger">Error al agregar producto</div>`);
+                $('#container').html('<div class="alert alert-danger">Error al agregar producto</div>');
             });
         }
     });
+    
 });
 // Listar productos
 function fetchProducts() {

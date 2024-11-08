@@ -21,39 +21,40 @@ class Products extends DataBase {
 
 
     // Agregar producto
-    public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles = 'Sin detalles', $imagen = 'imgdefault.png') {
-        // Comprobación de si el producto ya existe
-        $checkQuery = $this->conexion->prepare("SELECT * FROM productos WHERE nombre = ? AND eliminado = 0");
-        $checkQuery->bind_param('s', $name);
-        $checkQuery->execute();
-        $checkResult = $checkQuery->get_result();
+public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles = 'Sin detalles', $imagen = 'imgdefault.png') {
+    // Comprobación de si el producto ya existe
+    $checkQuery = $this->conexion->prepare("SELECT * FROM productos WHERE nombre = ? AND eliminado = 0");
+    $checkQuery->bind_param('s', $name);
+    $checkQuery->execute();
+    $checkResult = $checkQuery->get_result();
 
-        if ($checkResult->num_rows > 0) {
-            // Si ya existe, mandamos un mensaje de error
+    if ($checkResult->num_rows > 0) {
+        // Si ya existe, mandamos un mensaje de error
+        $this->response = array(
+            'status'  => 'error',
+            'message' => 'Ya existe un producto con ese nombre'
+        );
+    } else {
+        // Si no existe, insertamos el nuevo producto
+        $insertQuery = $this->conexion->prepare("INSERT INTO productos (nombre, precio, unidades, modelo, marca, detalles, imagen) 
+                                                 VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $insertQuery->bind_param('sdissss', $name, $precio, $unidades, $modelo, $marca, $detalles, $imagen);
+        $result = $insertQuery->execute();
+
+        if ($result) {
             $this->response = array(
-                'status'  => 'error',
-                'message' => 'Ya existe un producto con ese nombre'
+                'status'  => 'success',
+                'message' => 'Producto agregado'
             );
         } else {
-            // Si no existe, insertamos el nuevo producto
-            $insertQuery = $this->conexion->prepare("INSERT INTO productos (nombre, precio, unidades, modelo, marca, detalles, imagen) 
-                                                     VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $insertQuery->bind_param('sdissss', $name, $precio, $unidades, $modelo, $marca, $detalles, $imagen);
-            $result = $insertQuery->execute();
-
-            if ($result) {
-                $this->response = array(
-                    'status'  => 'success',
-                    'message' => 'Producto agregado'
-                );
-            } else {
-                $this->response = array(
-                    'status'  => 'error',
-                    'message' => "ERROR: No se ejecutó la inserción. " . $this->conexion->error
-                );
-            }
+            $this->response = array(
+                'status'  => 'error',
+                'message' => "ERROR: No se ejecutó la inserción. " . $this->conexion->error
+            );
         }
     }
+}
+
 
     // Verificar si el nombre del producto ya existe
     public function checkName($nombre) {
