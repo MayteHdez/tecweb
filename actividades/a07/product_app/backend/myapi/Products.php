@@ -128,7 +128,6 @@ public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles
         return $this->getData(); // Retornamos la respuesta en formato JSON
     }
 
-    // Editar producto
     public function editProduct($id, $name, $description) {
         // Validamos que los parámetros necesarios estén presentes
         if (empty($id) || empty($name) || empty($description)) {
@@ -138,10 +137,10 @@ public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles
             ];
             return $this->getData();
         }
-
+    
         // Intentamos decodificar el JSON recibido en description
         $product_data = json_decode($description, true);
-
+    
         if ($product_data === null) {
             // Si el JSON no es válido
             $this->response = [
@@ -150,19 +149,28 @@ public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles
             ];
             return $this->getData();
         }
-
-        // Extraemos los valores del JSON
+    
+        // Validamos que los datos importantes estén presentes en el JSON
+        if (!isset($product_data['precio'], $product_data['unidades'], $product_data['modelo'], $product_data['marca'], $product_data['detalles'], $product_data['imagen'])) {
+            $this->response = [
+                'status' => 'error',
+                'message' => 'Faltan datos en la descripción del producto'
+            ];
+            return $this->getData();
+        }
+    
+        // Extraemos y sanitizamos los valores del JSON
         $precio = mysqli_real_escape_string($this->conexion, $product_data['precio']);
         $unidades = mysqli_real_escape_string($this->conexion, $product_data['unidades']);
         $modelo = mysqli_real_escape_string($this->conexion, $product_data['modelo']);
         $marca = mysqli_real_escape_string($this->conexion, $product_data['marca']);
         $detalles = mysqli_real_escape_string($this->conexion, $product_data['detalles']);
         $imagen = mysqli_real_escape_string($this->conexion, $product_data['imagen']);
-
+    
         // Sanitizamos el nombre y el id
         $name = mysqli_real_escape_string($this->conexion, $name);
         $id = mysqli_real_escape_string($this->conexion, $id);
-
+    
         // Preparamos la consulta SQL para actualizar el producto
         $query = "UPDATE productos SET 
                     nombre = '$name', 
@@ -173,7 +181,7 @@ public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles
                     detalles = '$detalles', 
                     imagen = '$imagen' 
                   WHERE id = '$id'";
-
+    
         // Ejecutamos la consulta
         if ($this->conexion->query($query)) {
             // Si la consulta fue exitosa
@@ -188,9 +196,10 @@ public function addProduct($name, $precio, $unidades, $modelo, $marca, $detalles
                 'message' => 'ERROR: No se ejecutó la consulta. ' . $this->conexion->error
             ];
         }
-
+    
         return $this->getData(); // Retornamos la respuesta en formato JSON
     }
+    
 
     public function listProducts() {
         $sql = "SELECT id, nombre, precio FROM productos WHERE eliminado = 0";
