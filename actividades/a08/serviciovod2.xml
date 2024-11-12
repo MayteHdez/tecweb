@@ -1,0 +1,38 @@
+<catalogovod>
+    <cuenta correo="may.hdez@gmail.com">
+        <perfiles>
+            <perfil usuario="Mayte Hernández" idioma="Español"/>
+            <perfil usuario="Majo Hernández" idioma="Español"/>
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas>
+            <genero nombre="Animación">
+                <titulo nombre="Toy Story" duracion="01:21:00"/>
+                <titulo nombre="El viaje de Chihiro" duracion="02:05:00"/>
+                <titulo nombre="Coco" duracion="01:45:00"/>
+                <titulo nombre="Sherk" duracion="01:30:00"/>
+            </genero>
+            <genero nombre="Terror">
+                <titulo nombre="El Exorcista" duracion="02:12:00"/>
+                <titulo nombre="El Conjuro" duracion="01:52:00"/>
+                <titulo nombre="It" duracion="02:15:00"/>
+                <titulo nombre="Annabelle" duracion="01:39:00"/>
+            </genero>
+        </peliculas>
+        <programas>
+            <genero nombre="Suspenso">
+                <titulo nombre="Stranger Things" duracion="00:50:00"/>
+                <titulo nombre="Sherlock" duracion="01:30:00"/>
+                <titulo nombre="Hannibal" duracion="00:45:00"/>
+                <titulo nombre="True Detective" duracion="00:50:00"/>
+            </genero>
+            <genero nombre="Drama">
+                <titulo nombre="Breaking Bad" duracion="00:47:00"/>
+                <titulo nombre="The Crown" duracion="00:58:00"/>
+                <titulo nombre="Game of Thrones" duracion="00:57:00"/>
+                <titulo nombre="Big Little Lies" duracion="00:50:00"/>
+            </genero>
+        </programas>
+    </contenido>
+</catalogovod>
