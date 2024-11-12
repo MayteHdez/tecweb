@@ -1,0 +1,97 @@
+<catalogovod>
+    <cuenta>
+        <correo>may.hdez@gmail.com</correo>
+        <perfiles>
+            <perfil>
+                <usuario>Mayte Hernández</usuario>
+                <idioma>Español</idioma>
+            </perfil>
+            <perfil>
+                <usuario>Majo Hernández</usuario>
+                <idioma>Español</idioma>
+            </perfil>
+        </perfiles>
+    </cuenta>
+    <contenido>
+        <peliculas>
+            <genero>
+                <nombre>Animación</nombre>
+                <titulo>
+                    <nombre>Toy Story</nombre>
+                    <duracion>01:21:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>El viaje de Chihiro</nombre>
+                    <duracion>02:05:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Coco</nombre>
+                    <duracion>01:45:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Sherk</nombre>
+                    <duracion>01:30:00</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre>Terror</nombre>
+                <titulo>
+                    <nombre>El Exorcista</nombre>
+                    <duracion>02:12:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>El Conjuro</nombre>
+                    <duracion>01:52:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>It</nombre>
+                    <duracion>02:15:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Annabelle</nombre>
+                    <duracion>01:39:00</duracion>
+                </titulo>
+            </genero>
+        </peliculas>
+        <programas>
+            <genero>
+                <nombre>Suspenso</nombre>
+                <titulo>
+                    <nombre>Stranger Things</nombre>
+                    <duracion>00:50:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Sherlock</nombre>
+                    <duracion>01:30:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Hannibal</nombre>
+                    <duracion>00:45:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>True Detective</nombre>
+                    <duracion>00:50:00</duracion>
+                </titulo>
+            </genero>
+            <genero>
+                <nombre>Drama</nombre>
+                <titulo>
+                    <nombre>Breaking Bad</nombre>
+                    <duracion>00:47:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>The Crown</nombre>
+                    <duracion>00:58:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Game of Thrones</nombre>
+                    <duracion>00:57:00</duracion>
+                </titulo>
+                <titulo>
+                    <nombre>Big Little Lies</nombre>
+                    <duracion>00:50:00</duracion>
+                </titulo>
+            </genero>
+        </programas>
+    </contenido>
+</catalogovod>
